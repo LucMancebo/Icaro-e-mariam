@@ -1,0 +1,452 @@
+:root {
+    --primary-color: #e27508;
+    /* Gold/Bronze like the logo */
+    --text-color: #333;
+    --bg-color: #fff;
+    --secondary-bg: #fffbf7;
+    --font-script: 'Great Vibes', cursive;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+    --spacing-unit: 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    /* height: 100vh;  Removed constraints to allow natural scroll */
+    /* overflow-y: scroll; */
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-color: var(--secondary-bg);
+}
+
+/* Common styles for all full-screen sections */
+section,
+.hero,
+.footer {
+    /* scroll-snap-align: start; Removed */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    /* For identifying context if needed */
+}
+
+.container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-unit) 0;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 400;
+}
+
+.script-title {
+    font-family: var(--font-script);
+    font-size: 3.5rem;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    /* Already correct, but redundant with min-height above is fine */
+    background-color: #fcece3;
+    /* Fallback */
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+        url('assets/images/hero-bg.jpg');
+    background-attachment: fixed;
+    /* Parallax effect */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    /* Changed from flex-end to center for better full-screen layout, or keep flex-end if desired */
+    justify-content: center;
+    padding-bottom: 4rem;
+    text-align: center;
+    position: relative;
+}
+
+/* ... (skipping unchanged lines) ... */
+
+/* Footer */
+.footer {
+    height: 100vh;
+    /* Ensure 100vh for footer too, min-height handles it but explicit height is good for bg */
+    background-image: url('assets/images/footer-bg.jpg');
+    background-attachment: fixed;
+    /* Parallax effect */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent, rgba(255, 255, 255));
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.main-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Adjusted margin */
+}
+
+.title-img {
+    max-width: 100%;
+    width: 600px;
+    height: auto;
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Intro Section */
+.intro {
+    text-align: center;
+    padding: 4rem 1rem;
+}
+
+.logo-placeholder {
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-img {
+    width: 150px;
+    /* Adjust size as needed */
+    height: auto;
+}
+
+.intro-text {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    color: #e67e22;
+    /* Orange-ish tone */
+    margin-bottom: 1rem;
+}
+
+.date-highlight {
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--primary-color);
+}
+
+/* Our Story */
+.story {
+    padding: 4rem 0;
+
+    .text-content {
+        flex: 1;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding-right: 4rem;
+        /* Add spacing so it doesn't touch the image/center */
+    }
+
+    .script-title {
+        font-size: 2rem;
+        color: #ff008c;
+        /* Orange-ish tone */
+        margin-bottom: 1rem;
+        text-align: left;
+    }
+}
+
+
+
+
+
+/* Two Column Layout */
+.two-col {
+    display: flex;
+    align-items: flex-start;
+    /* Changed from center to start per user request */
+    gap: 3rem;
+}
+
+.two-col.reverse-mobile {
+    flex-direction: row;
+}
+
+@media (max-width: 768px) {
+
+    .two-col,
+    .two-col.reverse-mobile {
+        flex-direction: column;
+    }
+
+    .schedule-item,
+    .schedule-item.right {
+        text-align: center;
+    }
+}
+
+.text-content {
+    flex: 1;
+}
+
+.image-content {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.placeholder-img {
+    background-color: #ddd;
+    width: 100%;
+    border-radius: 8px;
+}
+
+.portrait {
+    height: 500px;
+    background-image: url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    /* Placeholder wedding couple */
+    background-size: cover;
+    background-position: center;
+}
+
+.portrait-small {
+    height: 400px;
+    width: 250px;
+}
+
+/* Save the Date */
+.save-the-date {
+    background-color: #fff;
+    /* White bg for contrast */
+    padding: 4rem 0;
+}
+
+.date-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.date-box {
+    width: 140px;
+    height: 120px;
+    background-color: var(--secondary-bg);
+    /* Lighter bg for boxes */
+    border: 1px solid var(--primary-color);
+    border-radius: 20%;
+    /* Circular looks nice for wedding themes */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.date-box .number {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.date-box .label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+}
+
+/* The Day */
+.the-day {
+    padding: 4rem 0;
+}
+
+.schedule-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 600px;
+}
+
+.schedule-item {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-style: italic;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.schedule-item.right {
+    align-self: flex-end;
+}
+
+.time {
+    font-weight: 600;
+    color: #444;
+}
+
+/* Dress Code */
+.dress-code {
+    padding: 4rem 0;
+}
+
+.dress-info h3 {
+    font-family: var(--font-heading);
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.dress-note {
+    margin-top: 2rem;
+    font-family: var(--font-script);
+    font-size: 2rem;
+    text-align: right;
+    color: #666;
+}
+
+/* Details */
+.details {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.boxes-row {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.detail-box {
+    width: 200px;
+    height: 200px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+}
+
+/* Footer */
+.footer {
+    height: 100vh;
+    /* Ensure 100vh for footer too, min-height handles it but explicit height is good for bg */
+    background-image: url('assets/images/footer-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 4rem;
+    text-align: center;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, var(--secondary-bg), transparent);
+}
+
+.footer-content {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2rem;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    width: 100%;
+}
+
+.big-date {
+    font-family: var(--font-heading);
+    font-size: 8rem;
+    color: #fff;
+    line-height: 1;
+    margin: 1rem 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.big-date span {
+    font-family: var(--font-script);
+    font-size: 2.6rem;
+    color: #ff008c;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    margin: auto 0 0 -15%;
+    line-height: 1.2;
+}
+
+.day-footer {
+    font-family: var(--font-script);
+    font-size: 2.6rem;
+    color: #fff;
+    line-height: 1;
+    margin: 2rem 0 2rem 13%;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.location {
+    font-family: var(--font-body);
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.rsvp-btn {
+    padding: 1rem 2.5rem;
+    background-color: #fff;
+    color: #ff008c;
+    border: none;
+    border-radius: 50px;
+    font-family: var(--font-body, var(--font-heading));
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.rsvp-btn:hover {
+    transform: scale(1.05);
+}
+
+
+/* Scroll Animations handled by GSAP */
