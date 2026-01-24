@@ -39,124 +39,128 @@ function startCountdown(targetDate) {
 // 2027, 2 (March is index 2), 6
 const weddingDate = new Date(2027, 2, 6, 15, 0, 0).getTime(); // Assuming 16:00 ceremony based on schedule
 
+
 // Initialize Lenis for smooth scroll
-const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    direction: 'vertical',
-    gestureDirection: 'vertical',
-    smooth: true,
-    mouseMultiplier: 1,
-    smoothTouch: false,
-    touchMultiplier: 2,
-});
+document.addEventListener('DOMContentLoaded', () => {
+    startCountdown(weddingDate);
 
-function raf(time) {
-    lenis.raf(time);
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        mouseMultiplier: 1,
+        smoothTouch: false,
+        touchMultiplier: 2,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
     requestAnimationFrame(raf);
-}
-requestAnimationFrame(raf);
 
-// Register GSAP ScrollTrigger
-gsap.registerPlugin(ScrollTrigger);
+    // Register GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
 
-// Integrate Lenis with ScrollTrigger
-// lenis.on('scroll', ScrollTrigger.update); // Optional but usually good
-// gsap.ticker.add((time)=>{
-//   lenis.raf(time * 1000);
-// });
-// gsap.ticker.lagSmoothing(0);
+    // Integrate Lenis with ScrollTrigger
+    // lenis.on('scroll', ScrollTrigger.update); // Optional but usually good
+    // gsap.ticker.add((time)=>{
+    //   lenis.raf(time * 1000);
+    // });
+    // gsap.ticker.lagSmoothing(0);
 
-// GSAP Animations
-const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    // GSAP Animations
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
 
-animatedElements.forEach((element) => {
-    // Simple fade up for generic elements
-    gsap.fromTo(element,
+    animatedElements.forEach((element) => {
+        // Simple fade up for generic elements
+        gsap.fromTo(element,
+            {
+                opacity: 0,
+                y: 50,
+                filter: "blur(10px)"
+            },
+            {
+                scrollTrigger: {
+                    trigger: element,
+                    start: "top 85%", // Animation starts when top of element hits 85% viewport height
+                    toggleActions: "play none none reverse" // Re-animate on scroll up? or "play none none none" for once
+                },
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+                duration: 1.2,
+                ease: "power3.out"
+            }
+        );
+    });
+
+    // Special Stagger for Lists/Grids (Override if they have specific parent classes)
+
+    // Stagger for Schedule Items
+    gsap.fromTo(".schedule-item",
+        { opacity: 0, x: -30 },
+        {
+            scrollTrigger: {
+                trigger: ".schedule-grid",
+                start: "top 80%",
+            },
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            stagger: 0.2, // 0.2s between each item
+            ease: "power2.out"
+        }
+    );
+
+    // Stagger for Details Boxes
+    gsap.fromTo(".detail-box",
+        { opacity: 0, scale: 0.9 },
+        {
+            scrollTrigger: {
+                trigger: ".boxes-row",
+                start: "top 80%",
+            },
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)"
+        }
+    );
+
+    // Hero Parallax (Title moves slower)
+    gsap.to(".main-title", {
+        scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: true
+        },
+        y: 150, // Move title down as we scroll down
+        opacity: 0
+    });
+
+    // Countdown Stagger
+    gsap.fromTo(".date-box",
         {
             opacity: 0,
-            y: 50,
-            filter: "blur(10px)"
+            y: 30,
+            scale: 0.8
         },
         {
             scrollTrigger: {
-                trigger: element,
-                start: "top 85%", // Animation starts when top of element hits 85% viewport height
-                toggleActions: "play none none reverse" // Re-animate on scroll up? or "play none none none" for once
+                trigger: "#countdown",
+                start: "top 85%",
             },
             opacity: 1,
             y: 0,
-            filter: "blur(0px)",
-            duration: 1.2,
-            ease: "power3.out"
+            scale: 1,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "back.out(1.7)"
         }
     );
 });
-
-// Special Stagger for Lists/Grids (Override if they have specific parent classes)
-
-// Stagger for Schedule Items
-gsap.fromTo(".schedule-item",
-    { opacity: 0, x: -30 },
-    {
-        scrollTrigger: {
-            trigger: ".schedule-grid",
-            start: "top 80%",
-        },
-        opacity: 1,
-        x: 0,
-        duration: 1,
-        stagger: 0.2, // 0.2s between each item
-        ease: "power2.out"
-    }
-);
-
-// Stagger for Details Boxes
-gsap.fromTo(".detail-box",
-    { opacity: 0, scale: 0.9 },
-    {
-        scrollTrigger: {
-            trigger: ".boxes-row",
-            start: "top 80%",
-        },
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "back.out(1.7)"
-    }
-);
-
-// Hero Parallax (Title moves slower)
-gsap.to(".main-title", {
-    scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: true
-    },
-    y: 150, // Move title down as we scroll down
-    opacity: 0
-});
-
-// Countdown Stagger
-gsap.fromTo(".date-box",
-    {
-        opacity: 0,
-        y: 30,
-        scale: 0.8
-    },
-    {
-        scrollTrigger: {
-            trigger: "#countdown",
-            start: "top 85%",
-        },
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "back.out(1.7)"
-    }
-);
-
