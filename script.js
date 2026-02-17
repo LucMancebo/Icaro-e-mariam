@@ -40,39 +40,16 @@ function startCountdown(targetDate) {
 const weddingDate = new Date(2027, 2, 6, 15, 0, 0).getTime(); // Assuming 16:00 ceremony based on schedule
 
 
-// Initialize Lenis for smooth scroll
+// Initialize GSAP
 document.addEventListener('DOMContentLoaded', () => {
     startCountdown(weddingDate);
-
-    const lenis = new Lenis({
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        direction: 'vertical',
-        gestureDirection: 'vertical',
-        smooth: true,
-        mouseMultiplier: 1,
-        smoothTouch: false,
-        touchMultiplier: 2,
-    });
-
-    function raf(time) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
 
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
-    // Integrate Lenis with ScrollTrigger
-    // lenis.on('scroll', ScrollTrigger.update); // Optional but usually good
-    // gsap.ticker.add((time)=>{
-    //   lenis.raf(time * 1000);
-    // });
-    // gsap.ticker.lagSmoothing(0);
-
     // GSAP Animations
-    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    // Exclude .main-title from generic animations to avoid conflict with parallax
+    const animatedElements = document.querySelectorAll('.animate-on-scroll:not(.main-title)');
 
     animatedElements.forEach((element) => {
         // Simple fade up for generic elements
@@ -86,7 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollTrigger: {
                     trigger: element,
                     start: "top 85%", // Animation starts when top of element hits 85% viewport height
-                    toggleActions: "play none none reverse" // Re-animate on scroll up? or "play none none none" for once
+                    end: "bottom 15%", // Define an end point to trigger reverse on exit
+                    toggleActions: "play reverse play reverse" // Play on enter/enterBack, reverse on leave/leaveBack
                 },
                 opacity: 1,
                 y: 0,
@@ -106,6 +84,8 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollTrigger: {
                 trigger: ".schedule-grid",
                 start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse"
             },
             opacity: 1,
             x: 0,
@@ -120,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
         { opacity: 0, scale: 0.9 },
         {
             scrollTrigger: {
+                end: "bottom 20%",
+                toggleActions: "play reverse play reverse",
                 trigger: ".boxes-row",
                 start: "top 80%",
             },
@@ -132,15 +114,19 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     // Hero Parallax (Title moves slower)
+    // Initial state set by CSS or GSAP set to ensure visibility at start
+    gsap.set(".main-title", { opacity: 1, y: 0, visibility: 'visible' }); 
+
     gsap.to(".main-title", {
         scrollTrigger: {
             trigger: ".hero",
             start: "top top",
-            end: "bottom top",
-            scrub: true
+            end: "center center", // Finish fading out by the time the center of hero hits center of viewport (or earlier)
+            scrub: true, // Direct scrub without smoothing to prevent lag in restoration
         },
-        y: 150, // Move title down as we scroll down
-        opacity: 0
+        y: 100, // Move title down as we scroll down
+        opacity: 0,
+        ease: "none"
     });
 
     // Countdown Stagger
@@ -152,6 +138,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             scrollTrigger: {
+                end: "bottom 15%",
+                toggleActions: "play reverse play reverse",
                 trigger: "#countdown",
                 start: "top 85%",
             },
