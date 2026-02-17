@@ -616,9 +616,11 @@ h3 {
 @media (max-width: 480px) {
   /* Tweak specific elements for small screens */
   
-  .hero {
+  .hero, .footer {
     /* Often mobile browsers have issues with fixed bg */
-    background-attachment: scroll; 
+    background-attachment: scroll;
+    height: auto; /* Allow content to dictate height on mobile if needed, or keep 100vh but rigorous */
+    min-height: 100vh;
   }
 
   .logo-img {
