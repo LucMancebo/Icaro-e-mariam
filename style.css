@@ -471,17 +471,20 @@ h3 {
   }
 
   /* Typography */
-  h1 { font-size: 2.2rem; }
-  h2 { font-size: 2rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.8rem; }
+
+  p {
+    font-size: 0.8rem; /* Ajuste global para paragrafos em mobile */
+  }
 
   .script-title {
-    font-size: 3rem;
+    font-size: 2.6rem;
     text-align: center;
   }
 
   .intro-text {
-    font-size: 1rem;
-    padding: 0 1rem;
+    font-size: 1.1rem;
   }
 
   /* Layout */
@@ -638,5 +641,58 @@ h3 {
 
   .date-box .number {
     font-size: 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  /* Ultra-small screens (iPhone SE, small Androids) */
+  
+  /* Text Resizing */
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.4rem; }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .script-title {
+    font-size: 2.2rem;
+  }
+
+  .intro-text {
+    font-size: 0.9rem;
+  }
+
+  /* Schedule */
+  .schedule-item {
+    font-size: 1.3rem;
+  }
+
+  /* Footer */
+  .big-date {
+    font-size: 3rem;
+  }
+
+  .big-date span {
+    font-size: 1.2rem;
+  }
+
+  .day-footer {
+    font-size: 1.3rem;
+  }
+
+  .rsvp-btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.8rem;
+    width: 100%; /* Make button full width for easier tapping */
+  }
+
+  /* Images */
+  .title-img { /* Allow it to take more space horizontally */
+    max-width: 300px;
+  }
+
+  .portrait {
+    height: 300px; /* Slightly shorter */
   }
 }
