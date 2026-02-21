@@ -48,11 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
     gsap.registerPlugin(ScrollTrigger);
 
     // GSAP Animations
-    // Exclude .main-title from generic animations to avoid conflict with parallax
+    // Exclude .main-title from generic animations para evitar conflito com parallax
     const animatedElements = document.querySelectorAll('.animate-on-scroll:not(.main-title)');
 
     animatedElements.forEach((element) => {
-        // Simple fade up for generic elements
         gsap.fromTo(element,
             {
                 opacity: 0,
@@ -62,9 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
             {
                 scrollTrigger: {
                     trigger: element,
-                    start: "top 85%", // Animation starts when top of element hits 85% viewport height
-                    end: "bottom 15%", // Define an end point to trigger reverse on exit
-                    toggleActions: "play reverse play reverse" // Play on enter/enterBack, reverse on leave/leaveBack
+                    start: "top 85%",
+                    end: "bottom 15%",
+                    toggleActions: "play reverse play reverse"
                 },
                 opacity: 1,
                 y: 0,
@@ -74,6 +73,14 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         );
     });
+
+    // Título principal: sem animação, aparece direto
+    const mainTitle = document.querySelector('.main-title');
+    if (mainTitle) {
+        mainTitle.style.opacity = '1';
+        mainTitle.style.transform = 'none';
+        mainTitle.style.filter = 'none';
+    }
 
     // Special Stagger for Lists/Grids (Override if they have specific parent classes)
 
@@ -129,26 +136,11 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "none"
     });
 
-    // Countdown Stagger
-    gsap.fromTo(".date-box",
-        {
-            opacity: 0,
-            y: 30,
-            scale: 0.8
-        },
-        {
-            scrollTrigger: {
-                end: "bottom 15%",
-                toggleActions: "play reverse play reverse",
-                trigger: "#countdown",
-                start: "top 85%",
-            },
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.2,
-            ease: "back.out(1.7)"
-        }
-    );
+    // Cronômetro: sem animação, aparece direto
+    document.querySelector('.cronometro-simples').style.opacity = '1';
+    document.querySelector('.cronometro-simples').style.transform = 'none';
+    document.querySelectorAll('.cronometro-simples .date-box').forEach(box => {
+        box.style.opacity = '1';
+        box.style.transform = 'none';
+    });
 });

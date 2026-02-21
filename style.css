@@ -76,13 +76,90 @@ h3 {
   background-size: cover;
   background-position: center;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  /* Changed from flex-end to center for better full-screen layout, or keep flex-end if desired */
-  justify-content: center;
   padding-bottom: 4rem;
   text-align: center;
   position: relative;
 }
+
+  @media (max-width: 900px) {
+    .cronometro-simples {
+      position: static;
+      align-items: center;
+      padding-right: 0;
+      margin-top: 2rem;
+      width: 100%;
+      box-shadow: 0 2px 8px 0 rgba(226,117,8,0.08);
+      border-radius: 14px;
+    }
+    .cronometro-simples .script-title {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+    .cronometro-simples .date-boxes {
+      gap: 0.7rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cronometro-simples .date-box {
+      min-width: 40px;
+      font-size: 0.9rem;
+      width: 80px;
+      height: 70px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cronometro-simples {
+      padding: 0.7rem 0.5rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+    }
+    .cronometro-simples .script-title {
+      font-size: 1.1rem;
+    }
+    .cronometro-simples .date-boxes {
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+    .cronometro-simples .date-box {
+      min-width: 28px;
+      font-size: 0.7rem;
+      width: 60px;
+      height: 50px;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    .cronometro-simples {
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  bottom: 2.5rem;
+  right: 0;
+  left: 0;
+  padding-right: 2.5rem;
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  pointer-events: auto;
+  z-index: 2;
+}
+.cronometro-simples .script-title {
+  font-size: 2.2rem;
+  margin-bottom: 0.7rem;
+}
+.cronometro-simples .date-boxes {
+  display: flex;
+  gap: 1.2rem;
+}
+.cronometro-simples .date-box {
+  min-width: 60px;
+  text-align: center;
+}
+
 
 /* ... (skipping unchanged lines) ... */
 
@@ -236,7 +313,7 @@ h3 {
 
 .portrait {
   height: 500px;
-  background-image: url("https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+  background-image: url("assets/images/WhatsApp\ Image\ 2026-02-21\ at\ 13.32.25.jpeg");
   /* Placeholder wedding couple */
   background-size: cover;
   background-position: center;
@@ -266,16 +343,13 @@ h3 {
 .date-box {
   width: 140px;
   height: 120px;
-  background-color: var(--secondary-bg);
-  /* Lighter bg for boxes */
-  border: 1px solid var(--primary-color);
   border-radius: 20%;
   /* Circular looks nice for wedding themes */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--primary-color);
+  color: #ff008c;
 }
 
 .date-box .number {
@@ -358,15 +432,70 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
 }
 
 .detail-box {
-  width: 200px;
-  height: 200px;
-  background-color: #e0e0e0;
-  border-radius: 10px;
+  width: 100%;
+  max-width: 320px;
+  min-height: 180px;
+  background: linear-gradient(135deg, #fff7ed 60%, #ffe0b2 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 18px 0 rgba(226, 117, 8, 0.08), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  padding: 1rem 1rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.18s;
+  border: 1.5px solid #f5c07a;
 }
+
+.detail-box:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 8px 24px 0 rgba(226, 117, 8, 0.13), 0 2px 8px 0 rgba(0,0,0,0.07);
+}
+
+.detail-box h3 {
+  color: var(--primary-color);
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.5px;
+}
+
+.detail-box p {
+  color: #4d3b1f;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.detail-box strong {
+  color: #b85c00;
+}
+
+.rsvp-link {
+  display: inline-block;
+  margin-top: 0.7rem;
+  padding: 0.7em 1.6em;
+  background: linear-gradient(90deg, #e27508 60%, #f5c07a 100%);
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 24px;
+  font-size: 1.08rem;
+  text-decoration: none;
+  box-shadow: 0 2px 8px 0 rgba(226, 117, 8, 0.10);
+  transition: background 0.18s, transform 0.15s;
+  letter-spacing: 0.5px;
+}
+.rsvp-link:hover, .rsvp-link:focus {
+  background: linear-gradient(90deg, #b85c00 60%, #e27508 100%);
+  color: #fffbe7;
+  transform: scale(1.04);
+  text-decoration: none;
+}
+
 
 /* Footer */
 .footer {
@@ -725,4 +854,4 @@ h3 {
     height: 220px; /* Force reliable height */
     object-fit: cover;
   }
-}
+}}
