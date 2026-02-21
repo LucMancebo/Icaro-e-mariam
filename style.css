@@ -26,7 +26,6 @@ body {
   font-family: var(--font-body);
   color: var(--text-color);
   line-height: 1.6;
-  background-color: var(--secondary-bg);
 }
 
 /* Common styles for all full-screen sections */
@@ -83,56 +82,7 @@ h3 {
   position: relative;
 }
 
-  @media (max-width: 900px) {
-    .cronometro-simples {
-      position: static;
-      align-items: center;
-      padding-right: 0;
-      margin-top: 2rem;
-      width: 100%;
-      box-shadow: 0 2px 8px 0 rgba(226,117,8,0.08);
-      border-radius: 14px;
-    }
-    .cronometro-simples .script-title {
-      font-size: 1.5rem;
-      text-align: center;
-    }
-    .cronometro-simples .date-boxes {
-      gap: 0.7rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .cronometro-simples .date-box {
-      min-width: 40px;
-      font-size: 0.9rem;
-      width: 80px;
-      height: 70px;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .cronometro-simples {
-      padding: 0.7rem 0.5rem;
-      border-radius: 10px;
-      margin-top: 1rem;
-    }
-    .cronometro-simples .script-title {
-      font-size: 1.1rem;
-    }
-    .cronometro-simples .date-boxes {
-      gap: 0.3rem;
-      flex-wrap: wrap;
-    }
-    .cronometro-simples .date-box {
-      min-width: 28px;
-      font-size: 0.7rem;
-      width: 60px;
-      height: 50px;
-    }
-  }
-  
-  @media (max-width: 400px) {
-    .cronometro-simples {
+.cronometro-simples {
   width: 100%;
   flex-direction: column;
   align-items: flex-end;
@@ -337,7 +287,6 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  flex-wrap: wrap;
 }
 
 .date-box {
@@ -854,4 +803,4 @@ h3 {
     height: 220px; /* Force reliable height */
     object-fit: cover;
   }
-}}
+}
