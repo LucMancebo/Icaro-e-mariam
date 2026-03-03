@@ -26,6 +26,16 @@ body {
   font-family: var(--font-body);
   color: var(--text-color);
   line-height: 1.6;
+  background-color: var(--secondary-bg);
+  /* Textura de papel - intensidade balanceada */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='crumpled'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='6' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23fff' surfaceScale='3' result='light'%3E%3CfeDistantLight azimuth='60' elevation='50'/%3E%3C/feDiffuseLighting%3E%3CfeBlend mode='multiply' in='SourceGraphic' in2='light'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23faf7f2' filter='url(%23crumpled)' opacity='0.5'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter2)' opacity='0.15'/%3E%3C/svg%3E");
+  background-repeat: repeat, repeat;
+  background-size:
+    600px 600px,
+    150px 150px;
+  background-blend-mode: soft-light, multiply;
 }
 
 /* Common styles for all full-screen sections */
@@ -39,6 +49,23 @@ section,
   justify-content: center;
   position: relative;
   /* For identifying context if needed */
+}
+
+/* Linhas divisórias elegantes entre as seções (efeito de esmaecimento lateral) */
+section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 2.5px; /* Deixei a linha um pouco mais grossa */
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  opacity: 0.6; /* Aumentei um pouquinho a opacidade para destacar a espessura */
 }
 
 .container {
@@ -59,6 +86,17 @@ h3 {
   font-size: 3.5rem;
   color: var(--text-color);
   text-align: center;
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Detalhes de titulos removidos (.script-title::after) */
+
+/* Remover enfeite no cronômetro e herói para não poluir */
+.cronometro-simples .script-title::after,
+.hero .script-title::after {
+  display: none;
 }
 
 /* Hero Section */
@@ -70,8 +108,7 @@ h3 {
   background:
     linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
     url("assets/images/hero-bg.jpg");
-  background-attachment: fixed;
-  /* Parallax effect */
+  /* Remover bg-attachment fixed que causa travamentos (paint lag) em dispositivos móveis e desktops */
   background-size: cover;
   background-position: center;
   display: flex;
@@ -110,25 +147,9 @@ h3 {
   text-align: center;
 }
 
-
 /* ... (skipping unchanged lines) ... */
 
-/* Footer */
-.footer {
-  height: 100vh;
-  /* Ensure 100vh for footer too, min-height handles it but explicit height is good for bg */
-  background-image: url("assets/images/footer-bg.jpg");
-  background-attachment: fixed;
-  /* Parallax effect */
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 4rem;
-  text-align: center;
-}
+/* Footer redundante removido */
 
 .hero::after {
   content: "";
@@ -213,6 +234,8 @@ h3 {
     /* Orange-ish tone */
     margin-bottom: 1rem;
     text-align: left;
+    position: relative;
+    display: inline-block;
   }
 }
 
@@ -243,8 +266,10 @@ h3 {
 .text-content {
   flex: 1;
 
-  & .script-title{
+  & .script-title {
     text-align: start;
+    display: inline-block;
+    width: auto;
   }
 }
 
@@ -253,6 +278,13 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 1rem;
+  position: relative;
+}
+
+/* Removed florais em story */
+.story {
+  position: relative;
+  overflow: visible;
 }
 
 .placeholder-img {
@@ -267,19 +299,49 @@ h3 {
   /* Placeholder wedding couple */
   background-size: cover;
   background-position: center;
+  border: 10px solid #fff;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(216, 27, 96, 0.1);
+  position: relative;
+  z-index: 1;
 }
 
 .portrait-small {
-  height: 400px;
+  height: 500px;
   width: 250px;
   object-fit: cover; /* Ensures image covers area without distortion */
-  border-radius: 8px; /* Maintain rounded corners */
+  border-radius: 4px; /* Maintain rounded corners */
+  border: 8px solid #fff;
+  box-shadow: 0 8px 25px rgba(216, 27, 96, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.portrait-dresscode {
+  height: auto;
+  max-height: 300px; /* Tamanho máximo de 300px */
+  width: auto;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
+  mix-blend-mode: multiply; /* Para tirar o fundo branco da imagem */
+  object-fit: contain;
+}
+
+/* Container de imagens do dress-code */
+.dress-code .row-images {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+  align-items: center; /* Centralizar verticalmente dentro da moldura */
+  justify-content: center;
 }
 
 /* Save the Date */
 .save-the-date {
-  background-color: #fff;
-  /* White bg for contrast */
+  background-color: rgba(255, 255, 255, 0.5);
+  /* White bg for contrast, agora sutil para mostrar textura do fundo */
   padding: 4rem 0;
 }
 
@@ -292,13 +354,27 @@ h3 {
 .date-box {
   width: 140px;
   height: 120px;
-  border-radius: 20%;
+  border-radius: 50%;
+  border: 1.5px dashed #ffb6c1;
   /* Circular looks nice for wedding themes */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #ff008c;
+  background-color: transparent;
+  position: relative;
+}
+
+.date-box::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  bottom: -5px;
+  left: -5px;
+  right: -5px;
+  border: 1px solid rgba(255, 0, 140, 0.2);
+  border-radius: 50%;
 }
 
 .date-box .number {
@@ -318,13 +394,18 @@ h3 {
 /* The Day */
 .the-day {
   padding: 4rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .schedule-grid {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  width: 100%;
   max-width: 600px;
+  margin: 2rem auto 0;
+  gap: 1rem;
 }
 
 .schedule-item {
@@ -332,17 +413,31 @@ h3 {
   font-size: 2rem;
   font-style: italic;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(226, 117, 8, 0.2); /* Linha divisória sutil com a cor principal */
+  color: var(--text-color);
+}
+
+.schedule-item:last-child {
+  border-bottom: none;
 }
 
 .schedule-item.right {
-  align-self: flex-end;
+  flex-direction: row-reverse;
+  text-align: right;
 }
 
 .time {
-  font-weight: 600;
-  color: #444;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+  font-style: normal;
+  letter-spacing: 2px;
 }
 
 /* Dress Code */
@@ -350,31 +445,94 @@ h3 {
   padding: 4rem 0;
 }
 
+.dress-code .two-col {
+  align-items: stretch;
+}
+
+.dress-code .text-content {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 4px solid #d81b60;
+  position: relative;
+  flex: 1;
+  border-radius: 1rem;
+}
+
+.dress-code .image-content {
+  background: #fff;
+  padding: 3rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 4px solid #d81b60;
+  border-radius: 1rem;
+  flex: 1;
+  display: flex;
+}
+
+.dress-code .text-content::before {
+  display: none;
+}
+
+.dress-info {
+  margin-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #ffe6ee;
+}
+
+.dress-info:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
 .dress-info h3 {
   font-family: var(--font-heading);
-  margin-top: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  color: #d81b60;
+  margin-bottom: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dress-info h3::before {
+  content: "✦";
+  font-size: 1rem;
+  color: #ffb6c1;
+}
+
+.dress-info p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.6;
 }
 
 .dress-note {
   font-family: var(--font-script);
-  font-size: 2rem;
-  color: #666;
+  font-size: 2.5rem;
+  color: #ff008c;
+  margin-bottom: 2rem;
+  margin-top: -1rem;
 }
 
 .dress-note-span {
-  display: block;
-  margin-top: 0;
-  font-weight: 400; /* Normal weight */
-  font-size: 0.75rem; /* Smaller size */
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: 500;
+  font-size: 0.85rem;
   color: #e74c3c;
-  letter-spacing: normal;
+  letter-spacing: 0.5px;
+  background: #fff5f5;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  border-left: 3px solid #e74c3c;
 }
 
 /* Details */
 .details {
   padding: 4rem 0;
   text-align: center;
+  position: relative;
 }
 
 .boxes-row {
@@ -387,25 +545,29 @@ h3 {
   width: 100%;
   max-width: 320px;
   min-height: 180px;
-  background: linear-gradient(135deg, #fff7ed 60%, #ffe0b2 100%);
+  background: linear-gradient(135deg, #ff266e 60%, #ff008c 100%);
   border-radius: 18px;
-  box-shadow: 0 4px 18px 0 rgba(226, 117, 8, 0.08), 0 1.5px 6px 0 rgba(0,0,0,0.04);
+  box-shadow:
+    0 4px 18px 0 rgba(255, 0, 140, 0.08),
+    0 1.5px 6px 0 rgba(0, 0, 0, 0.04);
   padding: 1rem 1rem;
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   transition: transform 0.18s;
-  border: 1.5px solid #f5c07a;
+  border: 1.5px solid #ff008c;
 }
 
 .detail-box:hover {
   transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 8px 24px 0 rgba(226, 117, 8, 0.13), 0 2px 8px 0 rgba(0,0,0,0.07);
+  box-shadow:
+    0 8px 24px 0 rgba(255, 0, 140, 0.13),
+    0 2px 8px 0 rgba(0, 0, 0, 0.07);
 }
 
 .detail-box h3 {
-  color: var(--primary-color);
+  color: #ffffff;
   font-family: var(--font-heading);
   font-size: 1.25rem;
   margin-bottom: 0.7rem;
@@ -413,38 +575,41 @@ h3 {
 }
 
 .detail-box p {
-  color: #4d3b1f;
+  color: #ffffff;
   font-size: 1.05rem;
   line-height: 1.6;
   margin-bottom: 0.5rem;
+  text-align: start;
 }
 
 .detail-box strong {
-  color: #b85c00;
+  color: #ffffff;
 }
 
 .rsvp-link {
   display: inline-block;
   margin-top: 0.7rem;
   padding: 0.7em 1.6em;
-  background: linear-gradient(90deg, #e27508 60%, #f5c07a 100%);
+  background: linear-gradient(90deg, #ff008c 60%, #ff66b2 100%);
   color: #fff;
   font-weight: 600;
   border: none;
   border-radius: 24px;
   font-size: 1.08rem;
   text-decoration: none;
-  box-shadow: 0 2px 8px 0 rgba(226, 117, 8, 0.10);
-  transition: background 0.18s, transform 0.15s;
+  box-shadow: 0 2px 8px 0 rgba(255, 0, 140, 0.2);
+  transition:
+    background 0.18s,
+    transform 0.15s;
   letter-spacing: 0.5px;
 }
-.rsvp-link:hover, .rsvp-link:focus {
-  background: linear-gradient(90deg, #b85c00 60%, #e27508 100%);
-  color: #fffbe7;
+.rsvp-link:hover,
+.rsvp-link:focus {
+  background: linear-gradient(90deg, #d81b60 60%, #ff008c 100%);
+  color: #fff0f5;
   transform: scale(1.04);
   text-decoration: none;
 }
-
 
 /* Footer */
 .footer {
@@ -472,10 +637,10 @@ h3 {
 }
 
 .footer-content {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.5);
   padding: 2rem;
   border-radius: 20px;
-  backdrop-filter: blur(5px);
+  /* backdrop-filter removido para otimizar scroll em mobile/placas de vídeo fracas */
   width: 100%;
 }
 
@@ -561,8 +726,12 @@ h3 {
   }
 
   /* Typography */
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.8rem; }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.8rem;
+  }
 
   p {
     font-size: 0.8rem; /* Ajuste global para paragrafos em mobile */
@@ -594,7 +763,7 @@ h3 {
     padding-right: 0;
     text-align: center;
   }
-  
+
   /* Dress Code Specific Mobile Adjustments */
   .dress-code .text-content {
     text-align: left; /* Reset alignment for readability */
@@ -606,18 +775,16 @@ h3 {
   }
 
   .dress-note {
-    text-align: center; /* Keep the note centered as requested */
-    margin-top: 2rem;
-    font-size: 1.5rem; /* Adjust size */
+    font-size: 2rem; /* Adjust size */
   }
-  
+
   .dress-info h3 {
-    font-size: 1.3rem; /* Adjust h3 size for mobile */
+    font-size: 1.4rem; /* Adjust h3 size for mobile */
     margin-bottom: 0.5rem;
   }
-  
+
   .dress-info p {
-    font-size: 1rem;
+    font-size: 1.05rem;
     line-height: 1.5;
     margin-bottom: 1.5rem;
   }
@@ -636,7 +803,7 @@ h3 {
     width: 100%;
     max-width: 400px;
   }
-  
+
   .portrait-small {
     width: 45%; /* Slightly less than 50% to account for gap */
     height: auto;
@@ -645,21 +812,36 @@ h3 {
     object-fit: cover;
   }
 
+  .portrait-dresscode {
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    aspect-ratio: auto;
+    max-width: 45%;
+  }
+
   /* Hero */
   .title-img {
     max-width: 350px;
   }
 
   /* Schedule */
+  .schedule-grid {
+    padding: 0;
+    width: 95%; /* Adjust width for mobile to not break out */
+    margin-top: 1.5rem;
+  }
+
   .schedule-item {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     flex-direction: column;
     text-align: center;
-    gap: 0.5rem;
+    gap: 0.8rem;
+    padding: 1.5rem 0;
   }
 
   .schedule-item.right {
-    align-self: center;
+    flex-direction: column;
     text-align: center;
   }
 
@@ -713,8 +895,9 @@ h3 {
 
 @media (max-width: 480px) {
   /* Tweak specific elements for small screens */
-  
-  .hero, .footer {
+
+  .hero,
+  .footer {
     /* Often mobile browsers have issues with fixed bg */
     background-attachment: scroll;
     height: auto; /* Allow content to dictate height on mobile if needed, or keep 100vh but rigorous */
@@ -746,10 +929,14 @@ h3 {
 
 @media (max-width: 400px) {
   /* Ultra-small screens (iPhone SE, small Androids) */
-  
+
   /* Text Resizing */
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 1.4rem; }
+  h1 {
+    font-size: 1.6rem;
+  }
+  h2 {
+    font-size: 1.4rem;
+  }
 
   p {
     font-size: 0.9rem;
@@ -788,17 +975,18 @@ h3 {
   }
 
   /* Images */
-  .title-img { /* Allow it to take more space horizontally */
+  .title-img {
+    /* Allow it to take more space horizontally */
     max-width: 300px;
   }
 
   .portrait {
-    height: 250px; 
+    height: 250px;
   }
 
   .portrait-small {
     /* Even smaller for tiny screens */
-    width: 48%; 
+    width: 48%;
     max-width: 150px;
     height: 220px; /* Force reliable height */
     object-fit: cover;
