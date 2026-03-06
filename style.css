@@ -127,7 +127,6 @@ h3 {
   bottom: 2.5rem;
   right: 0;
   left: 0;
-  padding-right: 2.5rem;
   background: none;
   box-shadow: none;
   border-radius: 0;
@@ -140,7 +139,6 @@ h3 {
 }
 .cronometro-simples .date-boxes {
   display: flex;
-  gap: 1.2rem;
 }
 .cronometro-simples .date-box {
   min-width: 60px;
@@ -494,7 +492,7 @@ h3 {
 .dress-info h3 {
   font-family: var(--font-heading);
   font-size: 1.3rem;
-  color: #d81b60;
+  color: #ff008c;
   margin-bottom: 0.8rem;
   display: flex;
   gap: 0.5rem;
@@ -524,12 +522,12 @@ h3 {
   margin-top: 0.5rem;
   font-weight: 500;
   font-size: 0.85rem;
-  color: #e74c3c;
+  color: #ff66b2;
   letter-spacing: 0.5px;
   background: #fff5f5;
   padding: 0.3rem 0.8rem;
   border-radius: 4px;
-  border-left: 3px solid #e74c3c;
+  border-left: 3px solid #ff66b2;
 }
 
 /* Details */
@@ -698,6 +696,11 @@ h3 {
   letter-spacing: 1px;
   cursor: pointer;
   transition: transform 0.2s;
+
+  & a{
+    color: inherit;
+    text-decoration: none;
+  }
 }
 
 .rsvp-btn:hover {
@@ -905,7 +908,7 @@ h3 {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     width: 100%;
-    max-width: 300px; /* Limit width so it doesn't stretch too much */
+    max-width:90dvw; /* Limit width so it doesn't stretch too much */
     margin: 0 auto;
   }
 
@@ -978,9 +981,6 @@ h3 {
 
   .portrait-small {
     /* Even smaller for tiny screens */
-    width: 48%;
-    max-width: 150px;
-    height: 220px; /* Force reliable height */
     object-fit: cover;
   }
 }
