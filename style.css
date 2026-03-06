@@ -342,6 +342,7 @@ h3 {
   filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.05));
   mix-blend-mode: multiply; /* Para tirar o fundo branco da imagem */
   object-fit: contain;
+  border: thick double #f77401; /* Moldura dupla com a cor principal */
 }
 
 /* Container de imagens do dress-code */
@@ -449,7 +450,7 @@ h3 {
 .time {
   font-family: var(--font-body);
   font-weight: 500;
-  color: var(--primary-color);
+  color: #f77401;
   font-size: 1.2rem;
   font-style: normal;
   letter-spacing: 2px;
