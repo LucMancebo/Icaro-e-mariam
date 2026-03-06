@@ -218,6 +218,12 @@ h3 {
 .story {
   padding: 4rem 0;
 
+  .container_story {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
   .text-content {
     flex: 1;
     text-align: left;
@@ -239,16 +245,27 @@ h3 {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .container_story {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 348px) {
+  .container_story {
+    flex-direction: column;
+  }
+}
+
 /* Two Column Layout */
 .two-col {
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
   /* Changed from center to start per user request */
   gap: 3rem;
-}
-
-.two-col.reverse-mobile {
-  flex-direction: row;
 }
 
 @media (max-width: 768px) {
@@ -295,7 +312,7 @@ h3 {
 
 .portrait {
   height: 500px;
-  background-image: url("assets/images/WhatsApp\ Image\ 2026-02-21\ at\ 13.32.25.jpeg");
+  background-image: url("assets/images/foto_historia.jpeg");
   /* Placeholder wedding couple */
   background-size: cover;
   background-position: center;
@@ -445,28 +462,17 @@ h3 {
   padding: 4rem 0;
 }
 
-.dress-code .two-col {
-  align-items: stretch;
-}
-
 .dress-code .text-content {
-  background: #fff;
-  padding: 3rem;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 4px solid #d81b60;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
   position: relative;
-  flex: 1;
-  border-radius: 1rem;
 }
 
 .dress-code .image-content {
-  background: #fff;
-  padding: 3rem;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 4px solid #d81b60;
-  border-radius: 1rem;
+  border-radius: 0;
+  box-shadow: none;
+  border-radius: 0;
   flex: 1;
   display: flex;
 }
@@ -477,7 +483,6 @@ h3 {
 
 .dress-info {
   margin-top: 1.5rem;
-  padding-bottom: 1.5rem;
   border-bottom: 1px solid #ffe6ee;
 }
 
@@ -488,7 +493,7 @@ h3 {
 
 .dress-info h3 {
   font-family: var(--font-heading);
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: #d81b60;
   margin-bottom: 0.8rem;
   display: flex;
@@ -503,15 +508,14 @@ h3 {
 
 .dress-info p {
   color: #555;
-  font-size: 1.1rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.2;
 }
 
 .dress-note {
   font-family: var(--font-script);
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   color: #ff008c;
-  margin-bottom: 2rem;
   margin-top: -1rem;
 }
 
@@ -554,9 +558,10 @@ h3 {
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   transition: transform 0.18s;
   border: 1.5px solid #ff008c;
+  gap: 1rem;
 }
 
 .detail-box:hover {
@@ -579,7 +584,7 @@ h3 {
   font-size: 1.05rem;
   line-height: 1.6;
   margin-bottom: 0.5rem;
-  text-align: start;
+  text-align: center;
 }
 
 .detail-box strong {
@@ -733,9 +738,7 @@ h3 {
     font-size: 1.8rem;
   }
 
-  p {
-    font-size: 0.8rem; /* Ajuste global para paragrafos em mobile */
-  }
+
 
   .script-title {
     font-size: 2.6rem;
@@ -804,20 +807,9 @@ h3 {
     max-width: 400px;
   }
 
-  .portrait-small {
-    width: 45%; /* Slightly less than 50% to account for gap */
-    height: auto;
-    aspect-ratio: 3/4; /* Slightly wider aspect ratio for mobile */
-    max-width: 180px;
-    object-fit: cover;
-  }
 
   .portrait-dresscode {
-    width: auto;
-    height: auto;
-    max-height: 300px;
-    aspect-ratio: auto;
-    max-width: 45%;
+    width: 80vw;
   }
 
   /* Hero */
