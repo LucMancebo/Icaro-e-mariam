@@ -22,10 +22,19 @@ function startCountdown(targetDate) {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        daysEl.innerText = days < 10 ? '0' + days : days;
-        hoursEl.innerText = hours < 10 ? '0' + hours : hours;
-        minutesEl.innerText = minutes < 10 ? '0' + minutes : minutes;
-        secondsEl.innerText = seconds < 10 ? '0' + seconds : seconds;
+        function setVal(el, val) {
+            const str = val < 10 ? '0' + val : String(val);
+            if (el.innerText !== str) {
+                el.classList.remove('tick');
+                void el.offsetWidth; // reflow to restart animation
+                el.classList.add('tick');
+                el.innerText = str;
+            }
+        }
+        setVal(daysEl, days);
+        setVal(hoursEl, hours);
+        setVal(minutesEl, minutes);
+        setVal(secondsEl, seconds);
     }
 
     const interval = setInterval(updateTimer, 1000);
@@ -54,7 +63,7 @@ document.addEventListener('DOMContentLoaded', () => {
     animatedElements.forEach((element) => {
         gsap.fromTo(element,
             {
-                opacity: 0,
+                opacity: 1,
                 y: 50,
                 filter: "blur(10px)"
             },
@@ -136,11 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ease: "none"
     });
 
-    // Cronômetro: sem animação, aparece direto
-    document.querySelector('.cronometro-simples').style.opacity = '1';
-    document.querySelector('.cronometro-simples').style.transform = 'none';
-    document.querySelectorAll('.cronometro-simples .date-box').forEach(box => {
-        box.style.opacity = '1';
-        box.style.transform = 'none';
-    });
+    // Cronômetro: sem animação
+    const cronometro = document.querySelector('.cronometro-simples');
+    cronometro.style.opacity = '1';
+    cronometro.style.transform = 'none';
 });

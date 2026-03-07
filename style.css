@@ -24,7 +24,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: var(--text-color);
+  color: #524c12;
   line-height: 1.6;
   background-color: var(--secondary-bg);
   /* Textura de papel - intensidade balanceada */
@@ -103,14 +103,16 @@ h3 {
 .hero {
   height: 100vh;
   /* Already correct, but redundant with min-height above is fine */
-  background-color: #fcece3;
-  /* Fallback */
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
-    url("assets/images/hero-bg.jpg");
+  background-color: var(--secondary-bg);
+  background-image:
+    url("assets/images/IMG_9330.PNG"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='crumpled'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.015' numOctaves='6' result='noise'/%3E%3CfeDiffuseLighting in='noise' lighting-color='%23fff' surfaceScale='3' result='light'%3E%3CfeDistantLight azimuth='60' elevation='50'/%3E%3C/feDiffuseLighting%3E%3CfeBlend mode='multiply' in='SourceGraphic' in2='light'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23faf7f2' filter='url(%23crumpled)' opacity='0.5'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter2'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter2)' opacity='0.15'/%3E%3C/svg%3E");
   /* Remover bg-attachment fixed que causa travamentos (paint lag) em dispositivos móveis e desktops */
-  background-size: cover;
-  background-position: center;
+  background-size: 60%, 600px 600px, 150px 150px;
+  background-position: center, 0 0, 0 0;
+  background-repeat: no-repeat, repeat, repeat;
+  background-blend-mode: normal, soft-light, multiply;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -314,7 +316,7 @@ h3 {
   /* Placeholder wedding couple */
   background-size: cover;
   background-position: center;
-  border: 10px solid #fff;
+  border: 4mm ridge #dfb135;
   border-radius: 4px;
   box-shadow: 0 10px 30px rgba(216, 27, 96, 0.1);
   position: relative;
@@ -371,13 +373,13 @@ h3 {
   width: 140px;
   height: 120px;
   border-radius: 50%;
-  border: 1.5px dashed #ffb6c1;
+  border: 1.5px dashed #dfb135;
   /* Circular looks nice for wedding themes */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: #ff008c;
+  color: #dfb135;
   background-color: transparent;
   position: relative;
 }
@@ -389,7 +391,6 @@ h3 {
   bottom: -5px;
   left: -5px;
   right: -5px;
-  border: 1px solid rgba(255, 0, 140, 0.2);
   border-radius: 50%;
 }
 
@@ -398,6 +399,19 @@ h3 {
   font-size: 2.5rem;
   font-weight: 600;
   line-height: 1;
+  display: inline-block;
+  transition: transform 0.15s ease;
+}
+
+.date-box .number.tick {
+  animation: number-tick 0.3s ease;
+}
+
+@keyframes number-tick {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-8px); }
+  60%  { transform: translateY(8px); }
+  100% { transform: translateY(0); }
 }
 
 .date-box .label {
@@ -456,6 +470,10 @@ h3 {
   letter-spacing: 2px;
 }
 
+.event {
+  color: #524c12;
+}
+
 /* Dress Code */
 .dress-code {
   padding: 4rem 0;
@@ -506,7 +524,6 @@ h3 {
 }
 
 .dress-info p {
-  color: #555;
   font-size: 1rem;
   line-height: 1.2;
 }
@@ -698,7 +715,7 @@ h3 {
   cursor: pointer;
   transition: transform 0.2s;
 
-  & a{
+  & a {
     color: inherit;
     text-decoration: none;
   }
@@ -741,8 +758,6 @@ h3 {
   h2 {
     font-size: 1.8rem;
   }
-
-
 
   .script-title {
     font-size: 2.6rem;
@@ -811,14 +826,15 @@ h3 {
     max-width: 400px;
   }
 
-
   .portrait-dresscode {
     width: 80vw;
   }
 
   /* Hero */
   .title-img {
-    max-width: 350px;
+    max-width: 250px;
+    position: relative; 
+    bottom: 22rem;
   }
 
   /* Schedule */
@@ -898,6 +914,7 @@ h3 {
     background-attachment: scroll;
     height: auto; /* Allow content to dictate height on mobile if needed, or keep 100vh but rigorous */
     min-height: 100vh;
+    background-size: 110dvh;
   }
 
   .logo-img {
@@ -909,7 +926,7 @@ h3 {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
     width: 100%;
-    max-width:90dvw; /* Limit width so it doesn't stretch too much */
+    max-width: 90dvw; /* Limit width so it doesn't stretch too much */
     margin: 0 auto;
   }
 
