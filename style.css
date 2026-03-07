@@ -44,7 +44,7 @@ section,
 .footer {
   /* scroll-snap-align: start; Removed */
   min-height: 100vh;
-  min-height: 100svh; /* evita resize quando barra do browser mobile some */
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -103,7 +103,7 @@ h3 {
 /* Hero Section */
 .hero {
   height: 100vh;
-  height: 100svh; /* evita resize quando barra do browser mobile some */
+  height: 100svh;
   /* Already correct, but redundant with min-height above is fine */
   background-color: var(--secondary-bg);
   background-image:
@@ -637,8 +637,8 @@ h3 {
 /* Footer */
 .footer {
   height: 100vh;
-  height: 100svh; /* evita resize quando barra do browser mobile some */
-  /* Ensure 100vh for footer too, min-height handles it but explicit height is good for bg */
+  height: 100svh;
+  /* Ensure 100svh for footer too, min-height handles it but explicit height is good for bg */
   background-image: url("assets/images/footer-bg.jpg");
   background-size: cover;
   background-position: center;
@@ -915,10 +915,10 @@ h3 {
   .footer {
     /* Often mobile browsers have issues with fixed bg */
     background-attachment: scroll;
-    height: auto; /* Allow content to dictate height on mobile if needed, or keep 100vh but rigorous */
+    height: auto; /* Allow content to dictate height on mobile if needed */
     min-height: 100vh;
-    min-height: 100svh; /* evita resize quando barra do browser mobile some */
-    background-size: 110svh; /* svh é estático, evita redimensionamento no scroll */
+    min-height: 100svh;
+    background-size: 110dvh;
   }
 
   .logo-img {
