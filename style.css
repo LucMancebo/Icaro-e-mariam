@@ -928,6 +928,7 @@ h3 {
     width: 100%;
     max-width: 90dvw; /* Limit width so it doesn't stretch too much */
     margin: 0 auto;
+    margin-bottom: 2rem;
   }
 
   .date-box {
