@@ -44,6 +44,7 @@ section,
 .footer {
   /* scroll-snap-align: start; Removed */
   min-height: 100vh;
+  min-height: 100svh; /* evita resize quando barra do browser mobile some */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -102,6 +103,7 @@ h3 {
 /* Hero Section */
 .hero {
   height: 100vh;
+  height: 100svh; /* evita resize quando barra do browser mobile some */
   /* Already correct, but redundant with min-height above is fine */
   background-color: var(--secondary-bg);
   background-image:
@@ -316,7 +318,7 @@ h3 {
   /* Placeholder wedding couple */
   background-size: cover;
   background-position: center;
-  border: 4mm ridge #dfb135;
+  border: 4mm ridge #f8ba0e;
   border-radius: 4px;
   box-shadow: 0 10px 30px rgba(216, 27, 96, 0.1);
   position: relative;
@@ -635,6 +637,7 @@ h3 {
 /* Footer */
 .footer {
   height: 100vh;
+  height: 100svh; /* evita resize quando barra do browser mobile some */
   /* Ensure 100vh for footer too, min-height handles it but explicit height is good for bg */
   background-image: url("assets/images/footer-bg.jpg");
   background-size: cover;
@@ -914,7 +917,8 @@ h3 {
     background-attachment: scroll;
     height: auto; /* Allow content to dictate height on mobile if needed, or keep 100vh but rigorous */
     min-height: 100vh;
-    background-size: 110dvh;
+    min-height: 100svh; /* evita resize quando barra do browser mobile some */
+    background-size: 110svh; /* svh é estático, evita redimensionamento no scroll */
   }
 
   .logo-img {
